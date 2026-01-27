@@ -1,0 +1,174 @@
+#### 0.0
+자바스크립트 1995년 브렌던 아이크가 만듬
+웹 애플리케이션을 만들기위한 필수 언어
+
+#### 0.2 자료형
+
+자바스크립트는 동적 언어로, 변수를 정의할 때 "자료형"을 정의할 필요가 없음.
+자바스크립트에는 총 6개의 자료형이 있다. 6개는 원시 자료형이고 나머지 1개는 객체
+원시자료형 : string, number, boolean, null, undefined, symbol
+null은 '값이 없음'을 나타내고, undefined는 '정의되지 않은 값'을 나타낸다.
+symbol은 고유하고 변경할 수 없는 값을 나타낸다.
+
+######
+# 객체
+######
+객체는 여러 속성의 모음을 저장할 수 있다
+
+const car = {
+    wheels: 4,
+    color: "red",
+    drive: function() {
+        console.log("wroom wroom");
+    }
+}
+
+console.log(Object.keys(car)[0]); //wheels
+console.log(typeof Object.keys(car)[0]); //string
+car.drive(); //wroom wrrom
+
+# 빈 객체 생성하기
+
+const car = new Object();
+const car = {};
+
+# 비어있는 객체에 새 속성을 추가하기
+
+car.color = 'red';
+
+# 객체의 속성에 접근하기
+
+console.log(car.wheels); //4
+console.log(car['color']); //red, 중간에 띄어쓰기가 있는 경우 해당 문법을 사용해야함.
+
+# 객체의 복사
+let car = {
+    color: 'red'
+}
+let secondCar = car;
+
+여기서 sencodCar는 복사가 된게아니라, car에 대한 참조이다.
+car를 수정하면, secondCar도 변경된다.
+==, ===연상자를 사용하면 true가 반환된다.
+
+반면 빈 객체들끼리 비교하면, false를 반환한다. 동일한 객체를 비교할때만 true를 반환한다는 것이다.
+
+★ 객체의 복사본을 만드는 방법은 아래와 같다
+const secondCar = Object.assign({}, car);
+
+car가 업데이트가 되어도 SecondCar에는 영향이 가지 않는다.
+
+
+######
+# 배열
+######
+배열은 순서대로 값을 저장하는 객체.
+인덱스를 사용하여 항목에 접근하는 것이 특징
+
+const 과일 = ['사과', '바나나', '오렌지'];
+과일[0]
+과일[1]
+과일[2]
+
+## 배열에 존재하는 메서드
+console.log(과일.length); //3
+과일.push('수박'); //끝에 추가
+과일.unshift('멜론'); //시작에 추가
+과일.pop(); //끝에서 제거
+과일.shift(); //시작에서 제거
+
+## typeof를 사용한 자료확인
+const str = "hi";
+typeof(str); //'string'
+
+const num = 12;
+typeof(num); //'number'
+
+const arr = [1, 2, 3];
+typeof(arr) //'object'
+
+const obj = {prop: 'value'};
+typeof(obj); //'object'
+
+typeof(null); //'object'
+
+
+
+#### 0.3 함수
+
+함수 정의
+function greet(name) {
+    console.log('hello' + name);
+}
+
+greet('han');
+//hello han
+
+원시자료형이 함수로 전달될때는 참조가 아니라, 값의 형태로 전달된다.
+객체나 배열을 함수에 전달할때는 참조로 전달이 된다.
+즉 해당 값에대한 수정사항이 원래의 객체에 반영된다.
+
+let myInt = 1;
+
+function 증가(value){
+    return value += 1;
+}
+
+console.log(myInt); //1
+console.log(증가(1)); //2
+console.log(myInt); //1
+
+=> 원래 변수에 영향을 주지 않았음.
+
+
+# 익명함수
+const greeter = function(name){
+    console.log("hello " + name);
+}
+greeter("han"); //hello han
+
+# ES6의 화살표함수를 사용한 익명함수
+const greeter = (name) => {
+    console.log("hello " + name);
+}
+greeter("han"); //hello han
+
+#### 0.4 함수 스코프와 this 키워드의 이해
+스코프는 자바에서 가장 중요한 개념중 하나
+
+전역스코프 : 전역스코프를 가지는 변수는 코드의 어느 곳에서나 접근할 수 있다.
+블록스코프 : 블록스코프를 가지는 변수는 변수가 선언된 블록 내부에서만 접근할 수 있다.
+블록 : 함수, 루프, 혹은 중괄호({})로 구분되는 모든 영역
+
+# this 키워드
+function logThis(){
+    console.log(this)
+}
+logThis() ; //Window{...}
+이 함수는 전역범위에서 호출했으므로, this는 Window 객체를 참조한다.
+스트릭트 모드로 설정하면 실수로, Window 객체를 참조하는 것을 방지할 수 있다.
+
+스트릭트 모드는 파일 시작부분에 'use strict'; 를 삽입하면 된다
+이렇게 하면 자바스크립트에 보다 엄격한 규칙을 적용할 수 있다.
+엄격한 규칙중에는 전역 객체의 값을 Window객체 대신에 undefined로 설정하는 규칙이 있어서,
+전역 범위로 정의된 this도 undefined가 된다.
+
+this값을 수동으로 설정하고자 할 때는 .bind()를 사용할 수 있다.
+
+# this.call()
+
+function Car(maker, color) {
+    this.carMaker = maker;
+    this.carColor = color;
+}
+
+function MyCar(maker, color){
+    Car.call(this, maker, color);
+    this.age = 5;
+}
+const myNewCar = new MyCar('bmw', 'red');
+
+.call에 MyCar객체를 전달하여 인수로 설정되게 할 수 있다.
+
+# this.apply()
+call과 비슷하지만 apply는 배열을 받음. 인수를 모를때 사용하기 좋음
