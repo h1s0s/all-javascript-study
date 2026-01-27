@@ -1,0 +1,26 @@
+5.1 기본적인 문자열 메서드
+
+# indexOf()
+문자열에서 지정된 값이 처음 나타나는 위치 반환
+const str = "this is a short sentence";
+str.indexOf("short");//10
+
+# slice()
+문자열의 지정된 부분을 새 문자열로 반환
+const str = "pizza, oragne, cereals";
+str.slice(0, 5);//pizza
+
+# toUpperCase(), toLowerCase()
+문자열 내의 모든 문자열을 대문자/소문자로 바꿈
+
+# startWith()
+매개변수로 받은 값으로 문자열이 시작하는지 true/false
+
+# endsWith()
+매개변수로 받은 값으로 문자열이 끝나는지 true/false
+
+# includes()
+우리가 전달한 값이 문자열에 포함되는지
+
+# repeat()
+인수만큼 문자열을 반복
