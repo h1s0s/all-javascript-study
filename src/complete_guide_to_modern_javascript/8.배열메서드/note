@@ -1,0 +1,32 @@
+//8.1 array.from()
+
+const fruits = document.querySelectorAll(".fruits p");
+const fruitsArray = Array.from(fruits);
+console.log(fruitsArray); //[p, p, p]; 객체가 배열로 반환됨
+const fruitNames = fruitsArray.map(fruit => fruit.textContent);
+
+//간결하게
+const fruitsArray2 = Array.from(fruits, fruit => {
+    console.log(fruit);
+    return fruit.textContent;
+});
+
+
+//8.2 Array.of()
+const digits = Array.of(1, 2, 3, 4, 5);
+console.log(digits);// [1, 2, 3, 4, 5]
+
+//8.3 Array.find()
+//조건에 일치하는 첫 원소를 반환
+const array = [1, 2, 3, 4]
+let found = array.find(e => e > 3);
+console.log(found); //4
+
+//8.4 Array.findIndex()
+//조건에 일치하는 첫번째 원소의 인덱스를 반환
+
+//8.5 Array.some()과 Array.every()
+const array2 = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
+
+console.log(array.some(e => e > 2)); // true : 하나라도 true면 true
+console.log(array.every(e => e > 2)); // fasle : 전체가 true여야지 true

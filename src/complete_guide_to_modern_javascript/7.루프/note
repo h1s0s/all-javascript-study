@@ -1,0 +1,40 @@
+//7.1 for of 루프
+
+//배열에 대한 반복
+var fruits = ['apple', 'banana', 'orange'];
+for (var i = 0; i < fruits.length; i++){
+    console.log(fruits[i]);
+}
+
+//for of 루프
+for (const fruit of fruits){
+    console.log(fruit);
+}
+
+//객체에 대한 반복
+const car = {
+    maker: "BMW",
+    color: "red",
+    year: "2010"
+};
+
+for (const prop of Object.keys(car)){
+    const calue = car[prop];
+    console.log(prop, value);
+}
+//Object.keys(car) 객체의 키값을 배열로 반환함
+
+//7.2 for in 루프
+for (const prop in car){
+    console.log(prop, car[prop]);
+}
+
+//7.3 for of와 in의 차이
+let list = [4, 5, 6];
+for (let i in list){
+    console.log(i); //"0", "1", "2"
+}
+
+for (let i in lest){
+    console.log(i); //4, 5, 6
+}
