@@ -94,3 +94,41 @@ Promise.reject(new Error('fail')).then(function(){
  * 
  * race()는 이터러블에 포함된 프로미스들 중 가장 먼저 성공 또는 실패한 결과를 반환한다.
  */
+
+/**
+ * 실전 예제: 주문 처리 흐름을 프로미스로 구성하기
+ * - 주문 생성 -> 결제 처리 -> 배송 시작 순서로 연결한다.
+ * - 중간에 실패하면 catch로 처리한다.
+ */
+
+const createOrder = (order) =>
+    new Promise((resolve) => {
+        setTimeout(() => resolve({ orderId: 1, order }), 300);
+    });
+
+const processPayment = (orderInfo) =>
+    new Promise((resolve, reject) => {
+        const isPaid = true;
+        setTimeout(() => {
+            if (isPaid) {
+                resolve({ ...orderInfo, paid: true });
+            } else {
+                reject(new Error('결제 실패'));
+            }
+        }, 300);
+    });
+
+const startShipping = (paymentInfo) =>
+    new Promise((resolve) => {
+        setTimeout(() => resolve({ ...paymentInfo, shipped: true }), 300);
+    });
+
+createOrder({ item: '책', quantity: 1 })
+    .then(processPayment)
+    .then(startShipping)
+    .then((result) => {
+        console.log('처리 완료:', result);
+    })
+    .catch((error) => {
+        console.error('처리 실패:', error.message);
+    });
