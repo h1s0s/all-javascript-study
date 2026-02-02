@@ -23,8 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': "off", //코드상에 실제로 사용하지 않는 변수를 오류로 알려주는
-      "react/prop-types": "off"
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
 ])
