@@ -14,8 +14,6 @@ import Counter from './components/Counter.jsx'
   하나의 컴포넌트를 따로 뺴주는게 좋다
  */ 
 
-
-
 function App() {
   // console.log(state); //상태
   // console.log(setState); //상태값을 변환하는 함수, 이걸 사용해 상태값을 변경해야지만 리렌더링이 됨
