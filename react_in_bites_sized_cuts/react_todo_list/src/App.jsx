@@ -1,5 +1,5 @@
 import './App.css'
-import { useRef, useReducer } from 'react'
+import { useRef, useReducer, useCallback, createContext } from 'react'
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
@@ -38,6 +38,7 @@ function reducer(state, action) {
     }
 }
 
+export const TodoContext = createContext();
 
 function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
@@ -55,19 +56,19 @@ function App() {
     })
   }
 
-  const onUpdate = (targetId) => {
+  const onUpdate = useCallback((targetId) => {
     dispatch({
       type: "UPDATE",
       targetId: targetId
-    })
-  }
+    });
+  }, []);
 
-  const onDelete = (targetId) => {    
-    dispatch({
-      type: "DELETE",
-      targetId: targetId
-    })
-  }
+  const onDelete = useCallback((targetId) => {
+      dispatch({
+        type: "DELETE",
+        targetId: targetId
+      });
+    }, []);
   //React는 State 객체/배열의 '참조'가 변경될 때 리렌더링을 결정합니다. 
   //새 객체/배열을 만들면 참조가 달라져 React가 변경을 감지하고 UI를 업데이트합니다.
   //그래서 기존 State를 직접 수정하지 않고 새로운 State를 만들어서 사용한다.
@@ -76,8 +77,12 @@ function App() {
     <div className='App'>
       {/* <Exam/> */}
         <Header/>
-        <Editor onCreate={onCreate}/>
-        <List todos={todos} onUpdate={onUpdate} onDelete={onDelete}/>
+        <TodoContext.Provider value={{
+          todos, onCreate, onUpdate, onDelete
+        }}>
+          <Editor/>
+          <List/>
+        </TodoContext.Provider>
     </div>
   )
 }
