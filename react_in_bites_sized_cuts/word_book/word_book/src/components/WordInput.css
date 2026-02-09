@@ -1,0 +1,147 @@
+/* 필터 및 시험 버튼 */
+.filter-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.filter-group button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.filter-group button.active {
+    background: #4A90E2;
+    color: white;
+    border-color: #4A90E2;
+}
+
+.btn-test {
+    margin-left: auto;
+    background: #34c759 !important;
+    color: white !important;
+    border: none !important;
+    font-weight: bold;
+}
+
+/* 입력창 그룹 - 카드와 너비를 맞춤 */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+
+/* 입력창이 너무 좁아지지 않도록 조정 */
+.input-group input {
+    flex: 1;
+    min-width: 0; /* flex 환경에서 input이 부모를 벗어나지 않게 방지 */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-add {
+    padding: 0 20px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+    /* 추가된 속성 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    min-width: 80px;     /* 버튼 최소 너비 확보 */
+    flex-shrink: 0;      /* 부모 너비가 좁아져도 버튼 크기 유지 */
+}
+
+
+/* 단어 리스트 및 카드 */
+.word-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.word-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+}
+
+.word-info {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+/* 루비 문자(한자 위 요미가나) */
+ruby {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+rt {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.meaning {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 액션 버튼 그룹 */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 체크박스 커스텀 */
+.check-box {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* SVG 아이콘 버튼 */
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.icon-speaker { fill: #555; }
+.icon-trash { fill: #ff4d4d; }
+
+/* 완료 상태 스타일 */
+.word-card.done {
+    background: #fcfcfc;
+    border: 1px dashed #ddd;
+}
+.word-card.done ruby, .word-card.done .meaning {
+    color: #ccc;
+}
